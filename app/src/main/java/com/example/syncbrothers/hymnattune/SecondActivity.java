@@ -99,7 +99,7 @@ public class SecondActivity extends Activity implements SeekBar.OnSeekBarChangeL
    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent serviceIntent) {
-            updateUI(serviceIntent);
+     //       updateUI(serviceIntent);
         }
     };
 

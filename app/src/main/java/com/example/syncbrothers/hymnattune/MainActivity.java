@@ -18,8 +18,9 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //Assign id to Tabhost.
+        /*Intent intent = new Intent(this, Songs.class);
+        startActivity(intent);
+      */  //Assign id to Tabhost.
         TabHostWindow = (TabHost) findViewById(android.R.id.tabhost);
 
         TabHostWindow.setOnTabChangedListener(this);

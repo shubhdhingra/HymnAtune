@@ -18,10 +18,6 @@ import java.io.IOException;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by Shubham on 10-10-2016.
- */
-
 public class myPlayService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener,
         MediaPlayer.OnErrorListener, MediaPlayer.OnSeekCompleteListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnInfoListener {
     private MediaPlayer player = new MediaPlayer();
@@ -62,7 +58,7 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
         bufferIntent = new Intent(BROADCAST_BUFFER);
 
         //set up intent for seekbar broadcast
-       // seekIntent = new Intent(BROADCAST_ACTION);
+        seekIntent = new Intent(BROADCAST_ACTION);
 
      //   player.setOnSeekCompleteListener(this);
         player.setOnCompletionListener(this);
@@ -81,7 +77,7 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
     public int onStartCommand(Intent intent, int flags, final int startId) {
 
         //set up receiver for seekbar change
-        registerReceiver(broadcastReceiver, new IntentFilter(SecondActivity.BROADCAST_SEEKBAR));
+//        registerReceiver(broadcastReceiver, new IntentFilter(SecondActivity.BROADCAST_SEEKBAR));
 
 
         //Manage incoming  phone calls during playback . pause media player on incomge.
@@ -247,13 +243,13 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
   //      cancelNotification();
 
         //Unregister seekbar receiver
-        unregisterReceiver(broadcastReceiver);
+       // unregisterReceiver(broadcastReceiver);
 
         //Unregister headset receiver
-        unregisterReceiver(headsetReceiver);
+        //unregisterReceiver(headsetReceiver);
 
         //Stop the seekbar handler  from sending updates to UI
-        handler.removeCallbacks(sendUpdatestoUI);
+       // handler.removeCallbacks(sendUpdatestoUI);
 
         //Service ends,need to tell activity to display Play Button
         resetButtonPlayStopBroadcast();
