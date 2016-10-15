@@ -12,21 +12,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.syncbrothers.hymnatune.Home_Logo">
 
+    <Space
+        android:id="@+id/space4"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true" />
+
+
     <ImageView
         android:id="@+id/home_back"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:src="@drawable/home_back"
+        android:layout_width="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
+        android:layout_height="200dp"
+        android:src="@drawable/home_back(2)"
+        android:layout_below="@id/space4" />
+
     <ImageView
         android:id="@+id/app_logo"
         android:layout_width="250dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/home_back"
+        android:layout_above="@id/space3"
         android:src="@drawable/app_name"
-
         />
+    <Space
+        android:id="@+id/space3"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        />
+
 </RelativeLayout>

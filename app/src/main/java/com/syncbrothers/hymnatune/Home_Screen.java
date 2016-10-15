@@ -1,8 +1,11 @@
 package com.syncbrothers.hymnatune;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -13,7 +16,7 @@ public class Home_Screen extends AppCompatActivity {
     TextView host;
     TextView join;
     TextView solo;
-
+    Integer isGranted;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,7 @@ public class Home_Screen extends AppCompatActivity {
         host=(TextView) findViewById(R.id.host);
         join=(TextView) findViewById(R.id.join);
         solo=(TextView) findViewById(R.id.solo);
+
     }
     void addedSoonToast(final View v)
     {
@@ -49,6 +53,10 @@ public class Home_Screen extends AppCompatActivity {
         else
         {
             solo.setBackgroundResource(R.drawable.rect_rounded_postclick);
+
+            String[] permissions = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE};
+
+          //  ActivityCompat.requestPermissions(this, permissions, isGranted);
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
@@ -59,8 +67,12 @@ public class Home_Screen extends AppCompatActivity {
                 }
             };
             Handler handler = new Handler();
-            handler.postDelayed(runnable,50);
+    //        if(isGranted && permissions[0]==PackageManager.PERMISSION_GRANTED)
+      //      {
+                handler.postDelayed(runnable,50);
+        //    }
         }
     }
+
 
 }
