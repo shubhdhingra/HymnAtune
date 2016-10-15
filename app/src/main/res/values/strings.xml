@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">Hymn Attune</string>
+    <string name="app_name">Hymn Atune</string>
+    <string name="host_group">Host A Group</string>
+    <string name="join_group">Join A Group</string>
+    <string name="play_solo">Play Solo</string>
 </resources>
