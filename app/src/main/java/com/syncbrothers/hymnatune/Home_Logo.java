@@ -1,9 +1,10 @@
-package com.example.syncbrothers.hymnattune;
+package com.syncbrothers.hymnatune;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
 
 public class Home_Logo extends AppCompatActivity {
 

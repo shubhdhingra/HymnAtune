@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.syncbrothers.hymnattune.Play_Screen">
+    tools:context="com.syncbrothers.hymnatune.Play_Screen">
 
     <ImageButton
         android:id="@+id/prev"

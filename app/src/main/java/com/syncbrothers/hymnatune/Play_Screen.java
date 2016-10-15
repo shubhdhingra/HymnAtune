@@ -1,4 +1,4 @@
-package com.example.syncbrothers.hymnattune;
+package com.syncbrothers.hymnatune;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 
 /**

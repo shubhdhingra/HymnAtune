@@ -1,4 +1,4 @@
-package com.example.syncbrothers.hymnattune;
+package com.syncbrothers.hymnatune;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;

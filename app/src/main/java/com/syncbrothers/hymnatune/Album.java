@@ -1,4 +1,4 @@
-package com.example.syncbrothers.hymnattune;
+package com.syncbrothers.hymnatune;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
+
 import java.math.BigDecimal;
 
 

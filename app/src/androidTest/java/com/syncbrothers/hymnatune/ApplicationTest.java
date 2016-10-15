@@ -1,4 +1,4 @@
-package com.example.shubham.hymnattune;
+package com.syncbrothers.hymnatune;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

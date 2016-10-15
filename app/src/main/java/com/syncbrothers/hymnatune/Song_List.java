@@ -1,11 +1,11 @@
-package com.example.syncbrothers.hymnattune;
+package com.syncbrothers.hymnatune;
 
 import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TabHost;
-import android.widget.TextView;
+
 
 public class Song_List extends TabActivity implements TabHost.OnTabChangeListener {
 

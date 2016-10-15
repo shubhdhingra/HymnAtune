@@ -8,7 +8,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context="com.example.syncbrothers.hymnattune.Album"
+    tools:context="com.syncbrothers.hymnatune.Album"
     android:background="@color/black">
 
     <ListView
