@@ -22,7 +22,7 @@ import android.widget.Toast;
  * Created by Shubham on 08-10-2016.
  */
 
-public class SecondActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
+public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeListener {
   //  private static final int UPDATE_FREQUENCY = 500;
     private static final int STEP_VALUE = 4000;
 
@@ -55,7 +55,7 @@ public class SecondActivity extends Activity implements SeekBar.OnSeekBarChangeL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.second);
+        setContentView(R.layout.activity_screen_play);
         try {
 
             Intent intent1 = getIntent();
@@ -246,7 +246,7 @@ public class SecondActivity extends Activity implements SeekBar.OnSeekBarChangeL
 
     //progress dialogue
     private void BufferDialogue() {
-        pdBuff = ProgressDialog.show(SecondActivity.this, "Buffering...", "Acquiring Song...", true);
+        pdBuff = ProgressDialog.show(Play_Screen.this, "Buffering...", "Acquiring Song...", true);
     }
 
     //Set up broadcast receiver

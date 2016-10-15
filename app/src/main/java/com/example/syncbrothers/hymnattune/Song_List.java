@@ -5,8 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TabHost;
+import android.widget.TextView;
 
-public class MainActivity extends TabActivity implements TabHost.OnTabChangeListener {
+public class Song_List extends TabActivity implements TabHost.OnTabChangeListener {
 
     TabHost TabHostWindow;
 
@@ -17,10 +18,12 @@ public class MainActivity extends TabActivity implements TabHost.OnTabChangeList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_song);
         /*Intent intent = new Intent(this, Songs.class);
         startActivity(intent);
       */  //Assign id to Tabhost.
+
+
         TabHostWindow = (TabHost) findViewById(android.R.id.tabhost);
 
         TabHostWindow.setOnTabChangedListener(this);

@@ -19,6 +19,6 @@ public class Home_Logo extends AppCompatActivity {
             }
         };
         Handler handler = new Handler();
-        handler.postDelayed(runnable,5000);
+        handler.postDelayed(runnable,2000);
     }
 }

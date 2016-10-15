@@ -42,7 +42,7 @@ public class Songs extends ListActivity {
         super.onListItemClick(list, view, position, id);
 
         currentFile = (String) view.getTag();
-        Intent intent = new Intent(Songs.this, SecondActivity.class);
+        Intent intent = new Intent(Songs.this, Play_Screen.class);
         intent.putExtra("currentFile", currentFile);
         startActivity(intent);
     }

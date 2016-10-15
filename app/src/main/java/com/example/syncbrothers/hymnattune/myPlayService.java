@@ -77,7 +77,7 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
     public int onStartCommand(Intent intent, int flags, final int startId) {
 
         //set up receiver for seekbar change
-//        registerReceiver(broadcastReceiver, new IntentFilter(SecondActivity.BROADCAST_SEEKBAR));
+//        registerReceiver(broadcastReceiver, new IntentFilter(Play_Screen.BROADCAST_SEEKBAR));
 
 
         //Manage incoming  phone calls during playback . pause media player on incomge.
@@ -356,7 +356,7 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
         Context context = getApplicationContext();
         CharSequence contentTitle = "Music In Service App";
         CharSequence contentText = "Listening to music";
-        Intent notificationIntent = new Intent(this, SecondActivity.class);
+        Intent notificationIntent = new Intent(this, Play_Screen.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
                 notificationIntent, 0);
         builder.setSmallIcon(icon).setContentTitle(contentTitle).setContentText(contentText).setContentIntent(contentIntent);

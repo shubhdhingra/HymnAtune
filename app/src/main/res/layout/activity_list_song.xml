@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/mediumvioletred"
-    tools:context="com.example.syncbrothers.hymnattune.MainActivity">
+    android:background="@color/faded_blue"
+    tools:context="com.example.syncbrothers.hymnattune.Song_List">
 
     <TabHost
         android:layout_width="match_parent"

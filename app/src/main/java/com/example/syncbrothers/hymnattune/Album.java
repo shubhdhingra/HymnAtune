@@ -46,7 +46,7 @@ public class Album extends ListActivity {
         super.onListItemClick(list, view, position, id);
 
         currentFile = (String) view.getTag();
-        Intent intent = new Intent(Album.this, SecondActivity.class);
+        Intent intent = new Intent(Album.this, Play_Screen.class);
         intent.putExtra("currentFile", currentFile);
         startActivity(intent);
     }
