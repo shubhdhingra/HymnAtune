@@ -48,10 +48,10 @@ public class Song_List extends TabActivity implements TabHost.OnTabChangeListene
         TabHostWindow.addTab(TabMenu2);
 
         for (int i = 0; i < TabHostWindow.getTabWidget().getChildCount(); i++) {
-            TabHostWindow.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#8A4117"));
+            TabHostWindow.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#6c5f83"));
         }
         TabHostWindow.getTabWidget().setCurrentTab(1);
-        TabHostWindow.getTabWidget().getChildAt(1).setBackgroundColor(Color.parseColor("#C35817"));
+        TabHostWindow.getTabWidget().getChildAt(1).setBackgroundColor(Color.parseColor("#53a8b9"));
 
     }
 
@@ -59,10 +59,10 @@ public class Song_List extends TabActivity implements TabHost.OnTabChangeListene
     public void onTabChanged(String tabId) {
         // TODO Auto-generated method stub
         for (int i = 0; i < TabHostWindow.getTabWidget().getChildCount(); i++) {
-            TabHostWindow.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#8A4117"));
+            TabHostWindow.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#6c5f83"));
         }
 
-        TabHostWindow.getTabWidget().getChildAt(TabHostWindow.getCurrentTab()).setBackgroundColor(Color.parseColor("#C35817"));
+        TabHostWindow.getTabWidget().getChildAt(TabHostWindow.getCurrentTab()).setBackgroundColor(Color.parseColor("#53a8b9"));
     }
 }
 

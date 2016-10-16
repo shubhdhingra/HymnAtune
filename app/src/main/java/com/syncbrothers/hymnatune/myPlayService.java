@@ -20,6 +20,7 @@ import static android.content.ContentValues.TAG;
 
 public class myPlayService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener,
         MediaPlayer.OnErrorListener, MediaPlayer.OnSeekCompleteListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnInfoListener {
+
     private MediaPlayer player = new MediaPlayer();
     private String currentFile;
 
@@ -42,8 +43,10 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
     public static final String BROADCAST_ACTION = "com.example.shubham.hymnattune.seekprogress";
 
     //Set Up broadcast identifier and Intent
-    public static final String BROADCAST_BUFFER = "com.example.shubham.hymnattune.broadcastbuffer";
+
+     public static final String BROADCAST_BUFFER = "com.example.shubham.hymnattune.broadcastbuffer";
     Intent bufferIntent;
+
     Intent seekIntent;
 
     //Declare headsetSwitch variable
@@ -55,12 +58,12 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
 
         Log.v(TAG, "Creating Service");
 //Instantiate bufferIntent to communicate with Activity for progress dialogue
-        bufferIntent = new Intent(BROADCAST_BUFFER);
+    //    bufferIntent = new Intent(BROADCAST_BUFFER);
 
         //set up intent for seekbar broadcast
         seekIntent = new Intent(BROADCAST_ACTION);
 
-     //   player.setOnSeekCompleteListener(this);
+        player.setOnSeekCompleteListener(this);
         player.setOnCompletionListener(this);
         player.setOnErrorListener(this);
         player.setOnPreparedListener(this);
@@ -77,7 +80,7 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
     public int onStartCommand(Intent intent, int flags, final int startId) {
 
         //set up receiver for seekbar change
-//        registerReceiver(broadcastReceiver, new IntentFilter(Play_Screen.BROADCAST_SEEKBAR));
+        registerReceiver(broadcastReceiver, new IntentFilter(Play_Screen.BROADCAST_SEEKBAR));
 
 
         //Manage incoming  phone calls during playback . pause media player on incomge.
@@ -122,14 +125,14 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
 //        initNotification();
 
         currentFile = intent.getExtras().getString("currentFile");
-        player.stop();
+//        player.stop();
         player.reset();
         if (!player.isPlaying()) {
             try {
                 player.setDataSource(currentFile);
 
                 //Send message to Activity  to display progress dialogue
-                sendBufferingBroadCast();
+      //          sendBufferingBroadCast();
 
                 //prepare media player
                 player.prepareAsync();
@@ -157,14 +160,18 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
         @Override
         public void run() {
             LogMediaPosition();
-            handler.postDelayed(this, 1000); //2seconds
+            handler.postDelayed(this, 1000); //1 seconds
         }
     };
 
     private void LogMediaPosition() {
-        if (player.isPlaying()) {
+            if (player.isPlaying()) {
             mediaPosition = player.getCurrentPosition();
             mediaMax = player.getDuration();
+                if(mediaPosition==mediaMax)
+                    songEnded=1;
+                else
+                songEnded=0;
             seekIntent.putExtra("counter", String.valueOf(mediaPosition));
             seekIntent.putExtra("mediaMax", String.valueOf(mediaMax));
             seekIntent.putExtra("song_ended", String.valueOf(songEnded));
@@ -230,10 +237,10 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
         if (player != null) {
             if (player.isPlaying()) {
                 player.stop();
-                player.reset();
+  //              player.reset();
             }
             player.release();
-            player = null;
+    //        player = null;
         }
 
         if (phoneStateListener != null) {
@@ -243,18 +250,18 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
   //      cancelNotification();
 
         //Unregister seekbar receiver
-       // unregisterReceiver(broadcastReceiver);
+        unregisterReceiver(broadcastReceiver);
 
         //Unregister headset receiver
-        //unregisterReceiver(headsetReceiver);
+        unregisterReceiver(headsetReceiver);
 
         //Stop the seekbar handler  from sending updates to UI
-       // handler.removeCallbacks(sendUpdatestoUI);
+        handler.removeCallbacks(sendUpdatestoUI);
 
         //Service ends,need to tell activity to display Play Button
         resetButtonPlayStopBroadcast();
     }
-
+/*
     //Send a message to Activity that audio is being prepared  and buffering started
     private void sendBufferingBroadCast() {
         bufferIntent.putExtra("buffering", "1");
@@ -267,6 +274,7 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
         sendBroadcast(bufferIntent);
     }
 
+*/
     //Send a message to Activity to reset the play button
     private void resetButtonPlayStopBroadcast() {
         bufferIntent.putExtra("buffering", "2");
@@ -289,7 +297,7 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
     public void onPrepared(MediaPlayer mp) {
 
         //Send a message to Activity to end progress dialogue
-        sendBufferCompleteBroadcast();
+//        sendBufferCompleteBroadcast();
         playMedia();
     }
 
@@ -343,6 +351,7 @@ public class myPlayService extends Service implements MediaPlayer.OnCompletionLi
             player.stop();
         }
     }
+
 /*
     private void initNotification() {
         String ns = Context.NOTIFICATION_SERVICE;

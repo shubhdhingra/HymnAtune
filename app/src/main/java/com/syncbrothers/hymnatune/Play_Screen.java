@@ -24,7 +24,7 @@ import android.widget.Toast;
  */
 
 public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeListener {
-  //  private static final int UPDATE_FREQUENCY = 500;
+    private static final int UPDATE_FREQUENCY = 500;
     private static final int STEP_VALUE = 4000;
 
     private TextView selectedFile = null;
@@ -33,25 +33,27 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
     private ImageButton prevButton = null;
     private ImageButton nextButton = null;
 
-    private boolean isStarted = true;
+    private boolean boolMusicPlaying = false;
     private String currentFile = "";
 
     //Seekbar variables
-    private SeekBar seekBar = null;
+    private SeekBar seekBar ;
    private int seekMax;
    private static int songEnded = 0;
     boolean mBroadcastIsRegistered;
 
+// Progress dialog and broadcast receiver variables
+
     boolean mBufferBroadcastIsRegistered;
-    private ProgressDialog pdBuff = null;
+   // private ProgressDialog pdBuff = null;
 
     //Declare broadcast action  and intent
     public static final String BROADCAST_SEEKBAR = "com.example.shubham.hymnattune.sendseekbar";
     Intent intent;
+    Intent serviceIntent;
 
 
-     Intent serviceIntent;
-    private boolean isOnline;
+    //private boolean isOnline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +61,19 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
         setContentView(R.layout.activity_screen_play);
         try {
 
-            Intent intent1 = getIntent();
+            Intent CurrentFileIntent = getIntent();
             serviceIntent = new Intent(this, myPlayService.class);
 
-            String currentFile = intent1.getExtras().getString("currentFile");
+            String currentFile = CurrentFileIntent.getExtras().getString("currentFile");
 
             //set up seekbar intent for broadcasting new position to service
-            //intent = new Intent(BROADCAST_SEEKBAR);
+            intent = new Intent(BROADCAST_SEEKBAR);
+
             Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
 
             initViews();
-            setListeners(cursor);
             startPlay(currentFile);
+            setListeners(cursor);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.getClass().getName() + " " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -85,22 +88,88 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
         playButton = (ImageButton) (findViewById(R.id.play));
         prevButton = (ImageButton) (findViewById(R.id.prev));
         nextButton = (ImageButton) (findViewById(R.id.next));
-        player = new MediaPlayer();
+      //  player = new MediaPlayer();
+        playButton.setImageResource(android.R.drawable.ic_media_play);
     }
 
     private void setListeners(Cursor cursor){
-        if (null != cursor) {
-            playButton.setOnClickListener(onButtonClick);
+
+        /*    playButton.setOnClickListener(onButtonClick);
             prevButton.setOnClickListener(onButtonClick);
             nextButton.setOnClickListener(onButtonClick);
+        */
+        if(null!=cursor) {
+            playButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    playButtonClick();
+                }
+            });
+
+            prevButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    prevButtonClick();
+                }
+            });
+
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    nextButtonClick();
+                }
+            });
+
             seekBar.setOnSeekBarChangeListener(this);
+
         }
     }
+
+    private void playButtonClick()
+    {
+        if(!boolMusicPlaying)
+        {
+            playButton.setImageResource(android.R.drawable.ic_media_pause);
+            startPlay(currentFile);
+            boolMusicPlaying=true;
+        }
+        else
+        {
+            if(boolMusicPlaying){
+                playButton.setImageResource(android.R.drawable.ic_media_play);
+                stopPlay();
+                boolMusicPlaying=false;
+            }
+        }
+    }
+
+    private  void nextButtonClick(){
+        int seekto = player.getCurrentPosition() + STEP_VALUE;
+
+        if (seekto > player.getDuration())
+            seekto = player.getDuration();
+        player.pause();
+        player.seekTo(seekto);
+        player.start();
+    }
+
+    private void prevButtonClick()
+    {
+
+        int seekto = player.getCurrentPosition() - STEP_VALUE;
+        if (seekto < 0)
+            seekto = 0;
+        player.pause();
+        player.seekTo(seekto);
+        player.start();
+    }
+
+
 
    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent serviceIntent) {
-     //       updateUI(serviceIntent);
+           updateUI(serviceIntent);
         }
     };
 
@@ -114,21 +183,20 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
         seekBar.setMax(seekMax);
         seekBar.setProgress(seekProgress);
         if (songEnded == 1) {
-            playButton.setImageResource(android.R.drawable.ic_media_play);
-        }
+             }
     }
     //End of seek bar update code
 
 
     private void startPlay(String file) {
         Log.i("Selected: ", file);
-//        checkConnectivity();
-//        if (isOnline) {
            // stopPlay();
 
             //split file
             selectedFile.setText(file);
-            serviceIntent.putExtra("currentFile", file);
+        playButton.setImageResource(android.R.drawable.ic_media_pause);
+
+        serviceIntent.putExtra("currentFile", file);
             try {
                 startService(serviceIntent);
             } catch (Exception e) {
@@ -136,30 +204,18 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
                 Toast.makeText(getApplicationContext(), e.getClass().getName() + " " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
 
-            //register receiver for seekbar
-            registerReceiver(broadcastReceiver, new IntentFilter(myPlayService.BROADCAST_ACTION));
+        //register receiver for seekbar
+        registerReceiver(broadcastReceiver, new IntentFilter(myPlayService.BROADCAST_ACTION));
 
-            mBroadcastIsRegistered = true;
+        mBroadcastIsRegistered = true;
 
-        /*} else {
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Network Not Connected...");
-            alertDialog.setMessage("Please connect to a network or try again!!!");
-            alertDialog.setButton(1, "OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
 
-                }
-            });
-            alertDialog.setIcon(android.R.drawable.arrow_down_float);
-            playButton.setImageResource(android.R.drawable.ic_media_play);
-            alertDialog.show();
-        }
-        */
     }
 
+
+
     private void stopPlay() {
-        //Unregister broadcats receiver for seek bar
+        //Unregister broadcast receiver for seek bar
         if (mBroadcastIsRegistered) {
           try {
                 unregisterReceiver(broadcastReceiver);
@@ -176,9 +232,11 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.getClass().getName() + " " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        isStarted = false;
+
+        boolMusicPlaying = false;
     }
 
+/*
     private View.OnClickListener onButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -199,25 +257,10 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
                     break;
                 }
                 case R.id.next: {
-                    int seekto = player.getCurrentPosition() + STEP_VALUE;
-
-                    if (seekto > player.getDuration())
-                        seekto = player.getDuration();
-                    player.pause();
-                    player.seekTo(seekto);
-                    player.start();
 
                     break;
                 }
                 case R.id.prev: {
-                    int seekto = player.getCurrentPosition() - STEP_VALUE;
-                    if (seekto < 0)
-                        seekto = 0;
-
-                    player.pause();
-                    player.seekTo(seekto);
-                    player.start();
-
                     break;
                 }
             }
@@ -225,12 +268,13 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
 
     };
 
+*/
     //Handle progress dialog for buffering
 
     private void showPD(Intent bufferIntent) {
         String bufferValue = bufferIntent.getStringExtra("buffering");
         int bufferIntValue = Integer.parseInt(bufferValue);
-        switch (bufferIntValue) {
+        /*switch (bufferIntValue) {
             case 0:
                 if (pdBuff != null) {
                     pdBuff.dismiss();
@@ -240,16 +284,18 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
                 BufferDialogue();
                 break;
             case 2:
+                */
+                if(bufferIntValue==2)
                 playButton.setImageResource(android.R.drawable.ic_media_play);
-                break;
-        }
-    }
+//                break;
 
+    }
+/*
     //progress dialogue
     private void BufferDialogue() {
         pdBuff = ProgressDialog.show(Play_Screen.this, "Buffering...", "Acquiring Song...", true);
     }
-
+*/
     //Set up broadcast receiver
     private BroadcastReceiver broadcastBufferReceiver = new BroadcastReceiver() {
         @Override
@@ -258,15 +304,6 @@ public class Play_Screen extends Activity implements SeekBar.OnSeekBarChangeList
         }
     };
 
-    /*private void checkConnectivity() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        if (cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting() ||
-                cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting()) {
-            isOnline = true;
-        } else
-            isOnline = false;
-    }*/
 
     @Override
     protected void onPause() {

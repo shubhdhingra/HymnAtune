@@ -11,7 +11,7 @@
     <color name="green">#008000</color>
     <color name="orange">#FF4500</color>
     <color name="light_blue">#ccffff</color>
-    <color name="faded_blue">#0066CC</color>
+    <color name="fade_blue">#0066CC</color>
     <color name="dark_faded_blue">#004080</color>
     <color name="mediumvioletred">#C71585</color>
 </resources>
