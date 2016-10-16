@@ -25,7 +25,7 @@
         android:layout_width="200dp"
         android:layout_centerHorizontal="true"
         android:layout_height="200dp"
-        android:src="@drawable/home_back"
+        android:src="@drawable/app_back"
         android:layout_below="@id/space4" />
 
     <ImageView
@@ -34,7 +34,7 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/space3"
-        android:src="@drawable/appname"
+        android:src="@drawable/app_name"
         />
     <Space
         android:id="@+id/space3"
