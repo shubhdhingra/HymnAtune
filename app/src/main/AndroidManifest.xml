@@ -35,10 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Song_List" />
-        <activity android:name=".PlayScreen" />
         <activity android:name=".Songs" />
-        <activity android:name=".Album" />
 
         <activity
             android:name=".Home_Screen"
