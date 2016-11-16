@@ -4,6 +4,9 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -13,7 +16,6 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-
 import java.math.BigDecimal;
 
 /**
@@ -22,13 +24,14 @@ import java.math.BigDecimal;
 
 public class Songs extends ListActivity {
 
-    private Songs.MediaCursorAdapter mediaAdapter = null;
+    private MediaCursorAdapter mediaAdapter = null;
     private String currentFile = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.songs);
+
         Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
         if (null != cursor) {
             cursor.moveToFirst();
@@ -37,14 +40,30 @@ public class Songs extends ListActivity {
             setListAdapter(mediaAdapter);
         }
     }
-
-
     @Override
     protected void onListItemClick(ListView list, View view, int position, long id) {
         super.onListItemClick(list, view, position, id);
+/*
+        // Animate the background color of clicked Item
+        ColorDrawable[] color = {
+                new ColorDrawable(Color.parseColor("#b6c75c")),
+                new ColorDrawable(Color.parseColor("#FF0000"))
+        };
+        TransitionDrawable trans = new TransitionDrawable(color);
+        view.setBackground(trans);
+        trans.startTransition(2000); // duration 2 seconds
 
+        // Go back to the default background color of Item
+        ColorDrawable[] color2 = {
+                new ColorDrawable(Color.parseColor("#FF0000")),
+                new ColorDrawable(Color.parseColor("#b6c75c"))
+        };
+        TransitionDrawable trans2 = new TransitionDrawable(color2);
+        view.setBackground(trans2);
+        trans2.startTransition(2000); // duration 2 seconds
+*/
         currentFile = (String) view.getTag();
-        Intent intent = new Intent(Songs.this, Play_Screen.class);
+        Intent intent = new Intent(Songs.this, PlayScreen.class);
         intent.putExtra("currentFile", currentFile);
         startActivity(intent);
     }

@@ -22,7 +22,7 @@
 
     <TextView
 
-        android:id="@+id/host"
+        android:id="@+id/host_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -43,10 +43,10 @@
         android:id="@+id/space1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/host" />
+        android:layout_below="@id/host_button" />
 
     <TextView
-        android:id="@+id/join"
+        android:id="@+id/join_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -68,10 +68,10 @@
         android:id="@+id/space2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/join" />
+        android:layout_below="@id/join_button" />
 
     <TextView
-        android:id="@+id/solo"
+        android:id="@+id/solo_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -88,4 +88,5 @@
         android:elevation="@dimen/elevate"
         android:onClick="onClick"
         android:clickable="true"/>
+
 </RelativeLayout>

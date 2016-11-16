@@ -3,6 +3,7 @@ package com.syncbrothers.hymnatune;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -21,9 +22,9 @@ public class Home_Screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        host=(TextView) findViewById(R.id.host);
-        join=(TextView) findViewById(R.id.join);
-        solo=(TextView) findViewById(R.id.solo);
+        host=(TextView) findViewById(R.id.host_button);
+        join=(TextView) findViewById(R.id.join_button);
+        solo=(TextView) findViewById(R.id.solo_button);
 
     }
     void addedSoonToast(final View v)
@@ -40,15 +41,35 @@ public class Home_Screen extends AppCompatActivity {
 
     }
     public void onClick(View v) {
-        if(v.getId()==R.id.host)
-        {
-            host.setBackgroundResource(R.drawable.rect_rounded_postclick);
-            addedSoonToast(host);
-        }
-        else if(v.getId()==R.id.join)
+        if(v.getId()==R.id.join_button)
         {
             join.setBackgroundResource(R.drawable.rect_rounded_postclick);
-            addedSoonToast(join);
+            //addedSoonToast(host);
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    solo.setBackgroundResource(R.drawable.rect_rounded_preclick);
+                }
+            };
+            Handler handler = new Handler();
+            handler.postDelayed(runnable,50);
+            join.setBackgroundResource(R.drawable.rect_rounded_preclick);
+        }
+        else if(v.getId()==R.id.host_button)
+        {
+            host.setBackgroundResource(R.drawable.rect_rounded_postclick);
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                    solo.setBackgroundResource(R.drawable.rect_rounded_preclick);
+                }
+            };
+            Handler handler = new Handler();
+            handler.postDelayed(runnable,50);
+            host.setBackgroundResource(R.drawable.rect_rounded_preclick);
+            //addedSoonToast(join);
         }
         else
         {
@@ -60,7 +81,7 @@ public class Home_Screen extends AppCompatActivity {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(getApplicationContext(),Song_List.class);
+                    Intent intent = new Intent(getApplicationContext(),Songs.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
                     solo.setBackgroundResource(R.drawable.rect_rounded_preclick);
