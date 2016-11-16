@@ -94,6 +94,7 @@ public class Songs extends ListActivity {
 
             name.setText(cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME)));
             title.setText(cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.TITLE)));
+           //updated
             long durationInMs=0;
             if(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION))!=null) {
                 durationInMs = Long.parseLong(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION)));
