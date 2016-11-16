@@ -61,11 +61,10 @@ public class Songs extends ListActivity {
         TransitionDrawable trans2 = new TransitionDrawable(color2);
         view.setBackground(trans2);
         trans2.startTransition(2000); // duration 2 seconds
-*/
-        currentFile = (String) view.getTag();
-        Intent intent = new Intent(Songs.this, PlayScreen.class);
-        intent.putExtra("currentFile", currentFile);
-        startActivity(intent);
+*/      currentFile = (String) view.getTag();
+//      Intent intent = new Intent(Songs.this, PlayScreen.class);
+//      intent.putExtra("currentFile", currentFile);
+//      startActivity(intent);
     }
 
     private class MediaCursorAdapter extends SimpleCursorAdapter {
@@ -92,10 +91,12 @@ public class Songs extends ListActivity {
 
             name.setText(cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME)));
             title.setText(cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.TITLE)));
+            long durationInMs=0;
+            if(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION))!=null) {
+                durationInMs = Long.parseLong(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION)));
+            }
 
-            long duratioInMs = Long.parseLong(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION)));
-
-            double durationInMin = ((double) duratioInMs / 1000.0) / 60.0;
+            double durationInMin = ((double) durationInMs / 1000.0) / 60.0;
 
             durationInMin = new BigDecimal(Double.toString(durationInMin)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
 
