@@ -84,6 +84,8 @@ public class Songs extends ListActivity {
             bindView(v, context, cursor);
             return v;
         }
+
+
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             TextView title = (TextView) view.findViewById(R.id.title);
@@ -92,10 +94,12 @@ public class Songs extends ListActivity {
 
             name.setText(cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME)));
             title.setText(cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.TITLE)));
+            long durationInMs=0;
+            if(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION))!=null) {
+                durationInMs = Long.parseLong(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION)));
+            }
 
-            long duratioInMs = Long.parseLong(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION)));
-
-            double durationInMin = ((double) duratioInMs / 1000.0) / 60.0;
+            double durationInMin = ((double) durationInMs / 1000.0) / 60.0;
 
             durationInMin = new BigDecimal(Double.toString(durationInMin)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
 
