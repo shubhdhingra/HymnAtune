@@ -141,11 +141,18 @@ public class PlayScreen extends Activity {
         //seekBar.setProgress(0);
         picker.setValue(0);
         long durationInMs=player.getCurrentPosition();
-        double durationInMin = ((double) durationInMs / 1000.0) / 60.0;
+        double durationInS=(double) durationInMs / 1000.0;
+        if(durationInS<60){
+            durationInS = new BigDecimal(Double.toString(durationInS)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
+            music_duration.setText("00:"+ durationInS);
+        }
+        else {
 
-        durationInMin = new BigDecimal(Double.toString(durationInMin)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
-        music_duration.setText(" "+durationInMin);
-
+            double durationInMin = (double) durationInS / 60.0;
+            durationInS=durationInS-durationInMin*60;
+            durationInS = new BigDecimal(Double.toString(durationInS)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
+            music_duration.setText(" " + durationInMin + ":" + durationInS);
+        }
         isStarted=false;
     }
 
