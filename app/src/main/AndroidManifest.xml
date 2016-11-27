@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.syncbrothers.hymnatune">
-    <uses-sdk android:minSdkVersion="19"/>
 
-    <uses-feature android:glEsVersion="0x00020000"
-        android:required="true" />
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+
+    <uses-sdk android:minSdkVersion="19"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.ACCESS_WIFI_STATE"
@@ -20,8 +20,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -37,16 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Song_List" />
         <activity android:name=".PlayScreen" />
         <activity android:name=".Songs" />
+        <activity android:name=".Album" />
+
         <activity
             android:name=".Home_Screen"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".Receiver"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".Play_Solo"
             android:launchMode="singleTop" />
     </application>
 
