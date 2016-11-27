@@ -3,4 +3,5 @@
     <string name="host_group">Host Group</string>
     <string name="join_group">Join Group</string>
     <string name="play_solo">Play Solo</string>
+    <string name="Start">Start</string>
 </resources>

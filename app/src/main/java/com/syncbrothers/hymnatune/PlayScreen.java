@@ -31,8 +31,8 @@ public class PlayScreen extends Activity {
     private TextView selectedFile = null;
     private MediaPlayer player = null;
     private ImageButton playButton = null;
-    private ImageButton prevButton = null;
-    private ImageButton nextButton = null;
+  //  private ImageButton prevButton = null;
+   // private ImageButton nextButton = null;
     //  private SeekBar seekBar=null;
     private HoloCircleSeekBar picker;
     private TextView music_duration=null;
@@ -58,8 +58,8 @@ public class PlayScreen extends Activity {
         selectedFile=(TextView)findViewById(R.id.selectedfile);
         //    seekBar=(SeekBar)findViewById(R.id.seekbar);
         playButton=(ImageButton)findViewById(R.id.play);
-        prevButton=(ImageButton)findViewById(R.id.prev);
-        nextButton=(ImageButton)findViewById(R.id.next);
+     //   prevButton=(ImageButton)findViewById(R.id.prev);
+       // nextButton=(ImageButton)findViewById(R.id.next);
         picker = (HoloCircleSeekBar) findViewById(R.id.picker);
         music_duration=(TextView) findViewById(R.id.music_duration);
 
@@ -75,8 +75,8 @@ public class PlayScreen extends Activity {
         {
             cursor.moveToFirst();
             playButton.setOnClickListener(onButtonClick);
-            prevButton.setOnClickListener(onButtonClick);
-            nextButton.setOnClickListener(onButtonClick);
+         //   prevButton.setOnClickListener(onButtonClick);
+           // nextButton.setOnClickListener(onButtonClick);
 
         }
         Intent CurrentFileIntent = getIntent();
@@ -141,18 +141,9 @@ public class PlayScreen extends Activity {
         //seekBar.setProgress(0);
         picker.setValue(0);
         long durationInMs=player.getCurrentPosition();
-        double durationInS=(double) durationInMs / 1000.0;
-        if(durationInS<60){
-            durationInS = new BigDecimal(Double.toString(durationInS)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
-            music_duration.setText("00:"+ durationInS);
-        }
-        else {
-
-            double durationInMin = (double) durationInS / 60.0;
-            durationInS=durationInS-durationInMin*60;
-            durationInS = new BigDecimal(Double.toString(durationInS)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
-            music_duration.setText(" " + durationInMin + ":" + durationInS);
-        }
+        int seconds = (int) (durationInMs / 1000) % 60 ;
+        int minutes = (int) ((durationInMs / (1000*60)) % 60);
+        music_duration.setText(minutes+":"+seconds);
         isStarted=false;
     }
 
@@ -161,10 +152,16 @@ public class PlayScreen extends Activity {
         //seekBar.setProgress(player.getCurrentPosition());
         picker.setValue(player.getCurrentPosition());
         long durationInMs=player.getCurrentPosition();
-        double durationInMin = ((double) durationInMs / 1000.0) / 60.0;
+        int seconds = (int) (durationInMs / 1000) % 60 ;
+        int minutes = (int) ((durationInMs / (1000*60)) % 60);
+        //double durationInMin = ((double) durationInMs / 1000.0) / 60.0;
 
-        durationInMin = new BigDecimal(Double.toString(durationInMin)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
-        music_duration.setText(" "+durationInMin);
+//        durationInMin = new BigDecimal(Double.toString(durationInMin)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
+   if(seconds<=9)
+        music_duration.setText("0"+minutes+":0"+seconds);
+        else
+       music_duration.setText("0"+minutes+":"+seconds);
+
 
         handler.postDelayed(updatePositionRunnable,UPDATE_FREQUENCY);
     }
@@ -192,7 +189,7 @@ public class PlayScreen extends Activity {
                     }
                     break;
                 }
-                case R.id.next: {
+/*                case R.id.next: {
                     int seekto=player.getCurrentPosition()+STEP_VALUE;
                     if(seekto>player.getDuration())
 
@@ -213,7 +210,7 @@ public class PlayScreen extends Activity {
                     player.seekTo(seekto);
                     player.start();
                     break;
-                }
+                }*/
             }
         }
     };

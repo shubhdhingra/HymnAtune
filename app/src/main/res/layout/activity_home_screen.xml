@@ -15,18 +15,108 @@
     <ImageView
         android:id="@+id/app_name"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:src="@drawable/app_name"
+        android:layout_height="150dp"
+        android:src="@drawable/hymn_attune"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
 
+    <!---
+    <TextView
+        android:id="@+id/receive_button"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/Receive"
+        android:textSize="25sp"
+        android:textColor="@color/fade_blue"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/rect_rounded_preclick"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:elevation="@dimen/elevate"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:layout_above="@+id/send_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp" />
+-->
+
+
+    <EditText
+        android:hint="Username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/app_name"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:id="@+id/solo_button"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/play_solo"
+        android:textSize="25sp"
+        android:textColor="@color/fade_blue"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/rect_rounded_preclick"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:elevation="@dimen/elevate"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/join_button"
+        android:layout_alignLeft="@+id/join_button"
+        android:layout_alignStart="@+id/join_button" />
+
+    <Button
+        android:text="@string/Start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:onClick="onClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/solo_button"
+        android:layout_alignStart="@+id/solo_button"
+        android:layout_marginLeft="79dp"
+        android:layout_marginStart="79dp" />
+
+    <TextView
+        android:id="@+id/join_button"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/join_group"
+        android:textSize="25sp"
+        android:textColor="@color/fade_blue"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/rect_rounded_preclick"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:elevation="@dimen/elevate"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:layout_marginRight="39dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/host_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
         android:id="@+id/host_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_centerInParent="true"
         android:text="@string/host_group"
         android:textSize="25sp"
         android:textColor="@color/fade_blue"
@@ -37,56 +127,8 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:elevation="@dimen/elevate"
         android:onClick="onClick"
-        android:clickable="true"/>
-
-    <Space
-        android:id="@+id/space1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/host_button" />
-
-    <TextView
-        android:id="@+id/join_button"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="@string/join_group"
-        android:textSize="25sp"
-        android:layout_below="@id/space1"
-        android:textColor="@color/fade_blue"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:background="@drawable/rect_rounded_preclick"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:elevation="@dimen/elevate"
-        android:onClick="onClick"
-        android:clickable="true"/>
-
-    <Space
-        android:id="@+id/space2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/join_button" />
-
-    <TextView
-        android:id="@+id/solo_button"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="@string/play_solo"
-        android:textSize="25sp"
-        android:textColor="@color/fade_blue"
-        android:layout_below="@id/space2"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:background="@drawable/rect_rounded_preclick"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:elevation="@dimen/elevate"
-        android:onClick="onClick"
-        android:clickable="true"/>
-
+        android:clickable="true"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/join_button"
+        android:layout_alignStart="@+id/join_button" />
 </RelativeLayout>

@@ -5,12 +5,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="red">#FF0000</color>
     <color name="black">#000000</color>
-    <color name="blue">#0000FF</color>
+    <color name="blue">#162ac1</color>
     <color name="yellow">#FFFF00</color>
     <color name="white">#FFFFFF</color>
     <color name="green">#008000</color>
     <color name="orange">#FF4500</color>
-    <color name="light_blue">#ccffff</color>
+    <color name="light_blue">#f4ffff</color>
     <color name="fade_blue">#0066CC</color>
     <color name="dark_faded_blue">#004080</color>
     <color name="mediumvioletred">#C71585</color>
@@ -23,5 +23,5 @@
     <color name="point_halo_color">#88252525</color>
     <color name="text_color">#FF0000</color>
     <color name="wheel_active_color">#00BFFF</color>
-    <color name="wheel_unactive_color">#FFCCCCCC</color>
+    <color name="wheel_unactive_color">#9c9b9b</color>
 </resources>

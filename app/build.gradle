@@ -31,4 +31,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.github.JesusM:HoloCircleSeekBar:v2.2.2'
+    compile files('libs/MyID3_for_Android.jar')
+    compile 'com.android.support:recyclerview-v7:24.2.1'
 }
