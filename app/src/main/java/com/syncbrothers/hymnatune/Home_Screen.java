@@ -2,7 +2,6 @@ package com.syncbrothers.hymnatune;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
@@ -19,18 +18,16 @@ import android.widget.Toast;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static com.syncbrothers.hymnatune.R.id.username;
 
 public class Home_Screen extends Activity implements View.OnClickListener  {
 
     TextView host;
     TextView join;
     TextView solo;
-    TextView receive;
     Button send;
     EditText username;
     private String networkSSID = "Hymn Attune";
-    private String networkPass = "pass";
+   // private String networkPass = "pass";
     private int flag;
 
     @Override
@@ -141,7 +138,7 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(getApplicationContext(),Play_Solo.class);
+                    Intent intent = new Intent(getApplicationContext(),PlaySolo.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
                     solo.setBackgroundResource(R.drawable.rect_rounded_preclick);

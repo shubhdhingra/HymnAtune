@@ -3,6 +3,8 @@
     package="com.syncbrothers.hymnatune">
 
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
@@ -37,8 +39,8 @@
         </activity>
         <activity android:name=".PlayScreen" />
         <activity android:name=".Songs" />
-        <activity android:name=".Play_Solo"/>
-        <activity android:name=".Receiver"/>
+        <activity android:name=".PlaySolo"/>
+        <activity android:name=".PlayScreenSolo"/>
         <activity
             android:name=".Home_Screen"
             android:launchMode="singleTop" />
