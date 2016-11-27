@@ -36,7 +36,7 @@ public class PlaySolo extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.play_solo);
+        setContentView(R.layout.playsolo);
         Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
         if (null != cursor) {
             cursor.moveToFirst();

@@ -56,7 +56,7 @@ public class Receiver extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.received);
+        setContentView(R.layout.receiver);
 
         username = (String) getIntent().getExtras().get("username");
         // TextView userNm = (TextView) findViewById(R.id.usrName);
