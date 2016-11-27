@@ -77,18 +77,6 @@
         android:layout_alignLeft="@+id/join_button"
         android:layout_alignStart="@+id/join_button" />
 
-    <Button
-        android:text="@string/Start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:onClick="onClick"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/solo_button"
-        android:layout_alignStart="@+id/solo_button"
-        android:layout_marginLeft="79dp"
-        android:layout_marginStart="79dp" />
-
     <TextView
         android:id="@+id/join_button"
         android:layout_width="250dp"
@@ -128,7 +116,22 @@
         android:elevation="@dimen/elevate"
         android:onClick="onClick"
         android:clickable="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/username"
         android:layout_alignLeft="@+id/join_button"
-        android:layout_alignStart="@+id/join_button" />
+        android:layout_alignStart="@+id/join_button"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:text="@string/Start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:onClick="onClick"
+        android:background="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textColor="@color/blue"
+        android:layout_marginBottom="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="125dp"
+        android:layout_marginStart="125dp" />
 </RelativeLayout>
