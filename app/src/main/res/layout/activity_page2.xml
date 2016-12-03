@@ -30,19 +30,26 @@
         android:layout_height="wrap_content"
         android:text="@string/share"
         android:id="@+id/b1"
-        android:layout_above="@+id/b2"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/spacer"
         android:layout_alignLeft="@+id/b2"
         android:layout_alignRight="@+id/b2"
         android:textColor="@android:color/black"
         android:background="@drawable/bg2" />
-
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/spacer"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/chat"
+        android:layout_centerInParent="true"
         android:id="@+id/b2"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/spacer"
         android:textColor="@android:color/black"
         android:background="@drawable/bg2" />
 

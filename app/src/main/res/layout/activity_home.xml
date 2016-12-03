@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.syncbrothers.hymnatune.Sharing.home"
-    android:background="#ffffff">
+    android:background="@color/fade_blue">
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -23,10 +23,12 @@
         android:textSize="30sp"
         android:textStyle="bold|italic" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:src="@drawable/help_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/help"
+        android:background="@color/White"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true" />
 

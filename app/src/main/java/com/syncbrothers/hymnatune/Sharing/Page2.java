@@ -55,19 +55,15 @@ public class Page2 extends Activity {    Button b1,b2,b3;
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                Intent i1=new Intent("com.syncbrothers.hymnatune.Sharing.WiFiDirectActivity");
-                startActivity(i1);
+                Intent intent = new Intent(getApplicationContext(),WiFiDirectActivity.class);
+                startActivity(intent);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                Intent i2 = new Intent("com.syncbrothers.hymnatune.Sharing.MainScreenActivity");
-                startActivity(i2);
+                Intent intent = new Intent(getApplicationContext(),MainScreenActivity.class);
+                startActivity(intent);
             }
         });
 

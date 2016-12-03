@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.syncbrothers.hymnatune.R;
 
 public class home extends Activity {
-    Button b,h;
+    Button b;
+    ImageView h;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +29,15 @@ public class home extends Activity {
                     }
                 }
         );
-        h=(Button)findViewById(R.id.help);
+        h=(ImageView)findViewById(R.id.help);
         h.getLayoutParams().width= 80;
         h.getLayoutParams().height=80;
         h.setBackgroundResource(R.drawable.help_img);
         h.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i=new Intent("com.syncbrothers.hymnatune.Sharing.help");
-                        startActivity(i);
+                        Intent intent = new Intent(getApplicationContext(),help.class);
+                        startActivity(intent);
                     }
                 }
         );
