@@ -1,12 +1,14 @@
 package com.syncbrothers.hymnatune;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+
+import com.syncbrothers.hymnatune.Wifi.Home_Screen;
 
 
-public class Home_Logo extends AppCompatActivity {
+public class Home_Logo extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +17,7 @@ public class Home_Logo extends AppCompatActivity {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(),Home_Screen.class);
+                Intent intent = new Intent(getApplicationContext(),Select_Screen.class);
                 startActivity(intent);
             }
         };

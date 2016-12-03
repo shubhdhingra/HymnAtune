@@ -1,4 +1,4 @@
-package com.syncbrothers.hymnatune;
+package com.syncbrothers.hymnatune.Wifi;
 
 import android.Manifest;
 import android.app.Activity;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.syncbrothers.hymnatune.R;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -39,6 +41,7 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
         solo=(TextView) findViewById(R.id.solo_button);
         send=(Button) findViewById(R.id.button);
         }
+
     public void onClick(View v) {
         if(v.getId()==R.id.join_button)
         {
@@ -165,44 +168,46 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
             Method[] wmMethods = wifiManager.getClass().getDeclaredMethods();
             boolean methodFound = false;
             for (Method method : wmMethods) {
-                if (method.getName().equals("setWifiApEnabled")) {
-                    methodFound = true;
-                    WifiConfiguration netConfig = new WifiConfiguration();
-                    netConfig.SSID=networkSSID;
-                    netConfig.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
-                    netConfig.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
-                    netConfig.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
-                    netConfig.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
-                    netConfig.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
-                    netConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
-                    netConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
-                    try {
-                        final boolean apStatus = (Boolean) method.invoke(wifiManager, netConfig, true);
-                        for (Method isWifiApEnabledMethod : wmMethods)
-                            if (isWifiApEnabledMethod.getName().equals("isWifiApEnabled")) {
-                                while (!(Boolean) isWifiApEnabledMethod.invoke(wifiManager)) {
-                                }
-                                for (Method method1 : wmMethods) {
-                                    if (method1.getName().equals("getWifiApState")) {
+                if (method.getName()!=null) {
+                    if (method.getName().equals("setWifiApEnabled")) {
+                        methodFound = true;
+                        WifiConfiguration netConfig = new WifiConfiguration();
+                        netConfig.SSID = networkSSID;
+                        netConfig.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
+                        netConfig.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
+                        netConfig.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
+                        netConfig.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
+                        netConfig.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
+                        netConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
+                        netConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
+                        try {
+                            final boolean apStatus = (Boolean) method.invoke(wifiManager, netConfig, true);
+                            for (Method isWifiApEnabledMethod : wmMethods)
+                                if (isWifiApEnabledMethod.getName()!=null && isWifiApEnabledMethod.getName().equals("isWifiApEnabled")) {
+                                    while (!(Boolean) isWifiApEnabledMethod.invoke(wifiManager)) {
+                                    }
+                                    for (Method method1 : wmMethods) {
+                                        if (method1.getName()!=null &&method1.getName().equals("getWifiApState")) {
+                                        }
                                     }
                                 }
-                            }
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (apStatus) {
-                                    System.out.println("SUCCESS ");
-                                    Toast.makeText(getApplicationContext(),"Wifi Hotspot Created",Toast.LENGTH_SHORT).show();
-                                } else {
-                                    System.out.println("FAILED");
-                                    Toast.makeText(getApplicationContext(),"Wifi Hotspot Creation Failed",Toast.LENGTH_SHORT).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (apStatus) {
+                                        System.out.println("SUCCESS ");
+                                        Toast.makeText(getApplicationContext(), "Wifi Hotspot Created", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        System.out.println("FAILED");
+                                        Toast.makeText(getApplicationContext(), "Wifi Hotspot Creation Failed", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-                    } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
-                        e.printStackTrace();
+                        } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

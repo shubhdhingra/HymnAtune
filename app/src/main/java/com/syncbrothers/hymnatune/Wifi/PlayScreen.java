@@ -1,5 +1,8 @@
-package com.syncbrothers.hymnatune;
+package com.syncbrothers.hymnatune.Wifi;
 
+/**
+ * Created by Shubham on 16-11-2016.
+ */
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,18 +16,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar;
+import com.syncbrothers.hymnatune.R;
 
 import java.io.IOException;
 
-public class PlayScreenSolo extends Activity {
+public class PlayScreen extends Activity {
     private static final int UPDATE_FREQUENCY = 500;
     private static final int STEP_VALUE = 4000;
 
     private TextView selectedFile = null;
     private MediaPlayer player = null;
     private ImageButton playButton = null;
-    //  private ImageButton prevButton = null;
-    // private ImageButton nextButton = null;
+  //  private ImageButton prevButton = null;
+   // private ImageButton nextButton = null;
     //  private SeekBar seekBar=null;
     private HoloCircleSeekBar picker;
     private TextView music_duration=null;
@@ -50,8 +54,8 @@ public class PlayScreenSolo extends Activity {
         selectedFile=(TextView)findViewById(R.id.selectedfile);
         //    seekBar=(SeekBar)findViewById(R.id.seekbar);
         playButton=(ImageButton)findViewById(R.id.play);
-        //   prevButton=(ImageButton)findViewById(R.id.prev);
-        // nextButton=(ImageButton)findViewById(R.id.next);
+     //   prevButton=(ImageButton)findViewById(R.id.prev);
+       // nextButton=(ImageButton)findViewById(R.id.next);
         picker = (HoloCircleSeekBar) findViewById(R.id.picker);
         music_duration=(TextView) findViewById(R.id.music_duration);
 
@@ -67,8 +71,8 @@ public class PlayScreenSolo extends Activity {
         {
             cursor.moveToFirst();
             playButton.setOnClickListener(onButtonClick);
-            //   prevButton.setOnClickListener(onButtonClick);
-            // nextButton.setOnClickListener(onButtonClick);
+         //   prevButton.setOnClickListener(onButtonClick);
+           // nextButton.setOnClickListener(onButtonClick);
 
         }
         Intent CurrentFileIntent = getIntent();
@@ -145,10 +149,10 @@ public class PlayScreenSolo extends Activity {
         //double durationInMin = ((double) durationInMs / 1000.0) / 60.0;
 
 //        durationInMin = new BigDecimal(Double.toString(durationInMin)).setScale(2, BigDecimal.ROUND_UP).doubleValue();
-        if(seconds<=9)
-            music_duration.setText("0"+minutes+":0"+seconds);
+   if(seconds<=9)
+        music_duration.setText("0"+minutes+":0"+seconds);
         else
-            music_duration.setText("0"+minutes+":"+seconds);
+       music_duration.setText("0"+minutes+":"+seconds);
 
 
         handler.postDelayed(updatePositionRunnable,UPDATE_FREQUENCY);

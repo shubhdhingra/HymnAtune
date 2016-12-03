@@ -8,7 +8,7 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:background="@color/colorPrimaryDark"
-    tools:context=".PlaySolo"
+    tools:context=".Wifi.PlaySolo"
     android:orientation="vertical"
     android:baselineAligned="false">
     <TextView

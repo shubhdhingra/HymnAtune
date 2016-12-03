@@ -1,4 +1,4 @@
-package com.syncbrothers.hymnatune;
+package com.syncbrothers.hymnatune.Wifi;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.syncbrothers.hymnatune.R;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -184,8 +186,8 @@ public class Receiver extends Activity {
     }
     private void check(final String song){
         text2=(EditText)findViewById(R.id.textView2);
-        al=new ArrayList<String>();
-        alname=new ArrayList<String>();
+ //       al=new ArrayList<String>();
+   //     alname=new ArrayList<String>();
         String fullpath="";
         String[] STAR = { "*" };
         Uri allsongsuri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
@@ -197,11 +199,11 @@ public class Receiver extends Activity {
             if (cursor.moveToFirst()) {
                 do {
                     String song_name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
-                    Toast.makeText(getApplicationContext(), "song name"+ song_name, Toast.LENGTH_SHORT).show();
+   //                 Toast.makeText(getApplicationContext(), "song name"+ song_name, Toast.LENGTH_SHORT).show();
                     fullpath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                     //           al.add(fullpath);
                     String filename=fullpath.substring(fullpath.lastIndexOf("/")+1);
-                    if(filename.equals(song))
+                    if(filename!=null && filename.equals(song))
                     {
                         Toast.makeText(getApplicationContext()," song found" , Toast.LENGTH_SHORT).show();
                               /*   */
@@ -210,7 +212,8 @@ public class Receiver extends Activity {
                 } while (cursor.moveToNext());
                 //
                 text2.setText("flag changed");
-                intent=new Intent(Receiver.this,PlayScreen.class);
+
+                intent=new Intent(Receiver.this,PlayScreenClient.class);
                 intent.putExtra("currentFile",fullpath);
                 startActivity(intent);
             }
@@ -224,6 +227,7 @@ public class Receiver extends Activity {
         for (int x = 0; x < recQue.size(); x++) {
             values[x] = recQue.get(x);
         }
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

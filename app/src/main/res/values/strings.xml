@@ -1,7 +1,65 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">Hymn Atune</string>
     <string name="host_group">Host Group</string>
     <string name="join_group">Join Group</string>
     <string name="play_solo">Play Solo</string>
     <string name="Start">Start</string>
+    <string name="Share">Share</string>
+    <string name="Play">Play</string>
+
+    <!-- Sharing-->
+    <string name="enable_p2p_button">P2P On/Off</string>
+    <string name="discover_peers_button">Discover</string>
+    <string name="empty"></string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="client_text">This device will act as a client.</string>
+    <string name="empty_message">No devices found.Turn on P2P and perform discovery.</string>
+    <string name="p2p_off_warning">Enable WI-Fi</string>
+    <string name="group_owner_text">Group Owner:"</string>
+    <string name="label_me">ME</string>
+    <string name="label_peers">PEERS</string>
+    <string name="call">CALLING</string>
+    <string name="chat">CHATTING</string>
+    <string name="share">SHARING</string>
+    <string name="title_activity_page2">CHOOSE</string>
+    <string name="title_activity_chatting">CHAT</string>
+    <string name="title_activity_calling">CALL</string>
+    <string name="title_activity_home">Hymn Atune</string>
+    <string name="title_activity_help">HELP</string>
+    <string name="start">START</string>
+    <string name="main_screen_tab1_title">Chats</string>
+    <string name="main_screen_tab2_title">History</string>
+    <string name="title_activity_chat_search_screen">ChatSearchScreen</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_chat_search_screen_frag">ChatSearchScreenFrag</string>
+    <string name="title_activity_chat_history_screen_frag">ChatHistoryScreenFrag</string>
+    <string name="refresh_list">Refresh list</string>
+    <string name="kill">Kill ()</string>
+    <string name="exit_app">Exit App</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="alert_dialog_password_TV">Password:</string>
+    <string name="main_empty_list">No available content</string>
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="send">Send</string>
+    <string name="create_new_public_chat_room">Create public chat room</string>
+    <string name="clear_display">Clear display</string>
+    <string name="ignore_this_user">Ignore user</string>
+    <string name="close_pub_chat_room">Close chat room</string>
+    <string name="clear_history_file">Clear history file</string>
+    <string name="clear_all_history">Clear all history</string>
+    <string name="ignore_user">Ignore user</string>
+    <string name="clear_igonred_users_list">Clear ignored users list</string>
+    <string name="unginore_user">Unignore user</string>
+    <string name="rooms_name">Room\'s name:</string>
+    <string name="pasword">Password</string>
+    <string name="roonNameIsMust">Room name is a must</string>
+    <string name="clear_banned_users_in_room">Clear banned users list</string>
+    <string name="kick_user">Kick user</string>
+    <string name="ban_user">Ban user</string>
+    <string name="no_discovered_peers">No discovered peers</string>
+    <string name="action_settings">Settings</string>
+
 </resources>
