@@ -26,11 +26,9 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
     TextView host;
     TextView join;
     TextView solo;
-    Button send;
-    EditText username;
     private String networkSSID = "Hymn Attune";
    // private String networkPass = "pass";
-    private int flag;
+   // private boolean flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,97 +37,37 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
         host=(TextView) findViewById(R.id.host_button);
         join=(TextView) findViewById(R.id.join_button);
         solo=(TextView) findViewById(R.id.solo_button);
-        send=(Button) findViewById(R.id.button);
         }
 
     public void onClick(View v) {
         if(v.getId()==R.id.join_button)
         {
-  /*          join.setBackgroundResource(R.drawable.rect_rounded_postclick);
-            //addedSoonToast(host);
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
-                    solo.setBackgroundResource(R.drawable.rect_rounded_preclick);
-                }
-            };
-            Handler handler = new Handler();
-            handler.postDelayed(runnable,50);
-            join.setBackgroundResource(R.drawable.rect_rounded_preclick);*/
+            join.setBackgroundResource(R.drawable.rect_rounded_postclick);
             Toast.makeText(getApplicationContext(),"Joining",Toast.LENGTH_LONG).show();
-
             JoinWifiNetwork joinOne = new JoinWifiNetwork();
             joinOne.execute((Void) null);
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(),"Press Start",Toast.LENGTH_LONG).show();
+                    join.setBackgroundResource(R.drawable.rect_rounded_preclick);
                 }
             };
             Handler handler = new Handler();
             handler.postDelayed(runnable,50);
-            flag=1;
         }
         else if(v.getId()==R.id.host_button)
         {
-           /* host.setBackgroundResource(R.drawable.rect_rounded_postclick);
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
-                    solo.setBackgroundResource(R.drawable.rect_rounded_preclick);
-                }
-            };
-            Handler handler = new Handler();
-            handler.postDelayed(runnable,50);
-            host.setBackgroundResource(R.drawable.rect_rounded_preclick); */
-
+            host.setBackgroundResource(R.drawable.rect_rounded_postclick);
             CreateWifiAccessPoint createOne = new CreateWifiAccessPoint();
             createOne.execute((Void) null);
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(),"Press Start",Toast.LENGTH_LONG).show();
+                    host.setBackgroundResource(R.drawable.rect_rounded_preclick);
                 }
             };
             Handler handler = new Handler();
             handler.postDelayed(runnable,50);
-            flag=0;
-        }
-        else if(v.getId()==R.id.button)
-        {
-            username=(EditText)findViewById(R.id.username);
-       if(flag==0){
-           Runnable runnable = new Runnable() {
-               @Override
-               public void run() {
-                   Intent i = new Intent(Home_Screen.this, Songs.class);
-                   username=(EditText)findViewById(R.id.username);
-                   i.putExtra("username",username.getText().toString());
-                   startActivity(i);
-
-               }
-           };
-           Handler handler = new Handler();
-           handler.postDelayed(runnable,50);
-
-       }
-            else if(flag==1)
-       {
-           Runnable runnable = new Runnable() {
-               @Override
-               public void run() {
-                   Intent i = new Intent(Home_Screen.this,Receiver.class);
-                   username=(EditText)findViewById(R.id.username);
-                   i.putExtra("username",username.getText().toString());
-                   startActivity(i);
-               }
-           };
-           Handler handler = new Handler();
-           handler.postDelayed(runnable,50);
-       }
-
         }
         else
         {
@@ -156,9 +94,6 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
     }
 
     private class CreateWifiAccessPoint extends AsyncTask<Void, Void, Boolean> {
-        {
-        }
-
         @Override
         protected Boolean doInBackground(Void... params) {
             WifiManager wifiManager = (WifiManager) getBaseContext().getSystemService(Context.WIFI_SERVICE);
@@ -212,8 +147,21 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
                 }
             }
             return methodFound;
-
         }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            Runnable runnable=new Runnable() {
+                @Override
+                public void run() {
+                    Intent i = new Intent(Home_Screen.this, Songs.class);
+                    startActivity(i);
+                }
+            };
+            Handler handler = new Handler();
+            handler.postDelayed(runnable,1000);
+         }
     }
 
     private class JoinWifiNetwork extends AsyncTask<Void, Void, Boolean> {
@@ -247,5 +195,18 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            Runnable runnable=new Runnable() {
+                @Override
+                public void run() {
+                    Intent i = new Intent(Home_Screen.this, Receiver.class);
+                    startActivity(i);
+                }
+            };
+            Handler handler = new Handler();
+            handler.postDelayed(runnable,1000);
+        }
     }
 }

@@ -62,13 +62,13 @@ public class Songs extends ListActivity{
     private InetAddress group;
     private MulticastSocket fileSocket;
     private InetAddress fileGroup;
-    private String host_username;
+    //private String host_username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.songs);
-        host_username = (String) getIntent().getExtras().get("username");
+       // host_username = (String) getIntent().getExtras().get("username");
 
         WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         if (wifi != null) {
