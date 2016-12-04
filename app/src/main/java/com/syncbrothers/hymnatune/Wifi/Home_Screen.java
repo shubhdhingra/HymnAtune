@@ -2,13 +2,21 @@ package com.syncbrothers.hymnatune.Wifi;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,8 +35,6 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
     TextView join;
     TextView solo;
     private String networkSSID = "Hymn Attune";
-   // private String networkPass = "pass";
-   // private boolean flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +49,12 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
         if(v.getId()==R.id.join_button)
         {
             join.setBackgroundResource(R.drawable.rect_rounded_postclick);
-            Toast.makeText(getApplicationContext(),"Joining",Toast.LENGTH_LONG).show();
-            JoinWifiNetwork joinOne = new JoinWifiNetwork();
-            joinOne.execute((Void) null);
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
                     join.setBackgroundResource(R.drawable.rect_rounded_preclick);
+                     Intent intent = new Intent(getApplicationContext(),Join.class);
+                    startActivity(intent);
                 }
             };
             Handler handler = new Handler();
@@ -58,16 +63,30 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
         else if(v.getId()==R.id.host_button)
         {
             host.setBackgroundResource(R.drawable.rect_rounded_postclick);
-            CreateWifiAccessPoint createOne = new CreateWifiAccessPoint();
-            createOne.execute((Void) null);
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    host.setBackgroundResource(R.drawable.rect_rounded_preclick);
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            final EditText ssidText = new EditText(getApplicationContext());
+            alert.setMessage("Enter Device Name");
+            alert.setTitle("HotSpot Generator");
+            ssidText.setGravity(Gravity.CENTER);
+            alert.setView(ssidText);
+            alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    networkSSID=ssidText.getText().toString();
+                    CreateWifiAccessPoint createOne = new CreateWifiAccessPoint();
+                    createOne.execute((Void) null);
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            host.setBackgroundResource(R.drawable.rect_rounded_preclick);
+                        }
+                    };
+                    Handler handler = new Handler();
+                    handler.postDelayed(runnable,50);
                 }
-            };
-            Handler handler = new Handler();
-            handler.postDelayed(runnable,50);
+            });
+            alert.setCancelable(true);
+            alert.show();
         }
         else
         {
@@ -92,6 +111,7 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
         //    }
         }
     }
+
 
     private class CreateWifiAccessPoint extends AsyncTask<Void, Void, Boolean> {
         @Override
@@ -164,49 +184,4 @@ public class Home_Screen extends Activity implements View.OnClickListener  {
          }
     }
 
-    private class JoinWifiNetwork extends AsyncTask<Void, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(Void... params) {
-
-            WifiConfiguration conf = new WifiConfiguration();
-            conf.SSID = "\"" + networkSSID + "\"";
-            conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
-
-            WifiManager wifiManager = (WifiManager) getBaseContext().getSystemService(Context.WIFI_SERVICE);
-            wifiManager.addNetwork(conf);
-            if (!wifiManager.isWifiEnabled()) {
-                wifiManager.setWifiEnabled(true);
-                wifiManager.startScan();
-            }
-
-            int netId = wifiManager.addNetwork(conf);
-            wifiManager.disconnect();
-            wifiManager.enableNetwork(netId, true);
-            wifiManager.reconnect();
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getApplicationContext(),"Joined to "+networkSSID,Toast.LENGTH_SHORT).show();
-                    System.out.println("SUCCESS ");
-                }
-            });
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-            Runnable runnable=new Runnable() {
-                @Override
-                public void run() {
-                    Intent i = new Intent(Home_Screen.this, Receiver.class);
-                    startActivity(i);
-                }
-            };
-            Handler handler = new Handler();
-            handler.postDelayed(runnable,1000);
-        }
-    }
 }

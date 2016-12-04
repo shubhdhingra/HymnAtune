@@ -4,19 +4,18 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="19"/>
+    <uses-sdk android:minSdkVersion="19" />
 
     <!-- Features -->
-    <uses-feature android:glEsVersion="0x00020000" android:required="true" >
-    </uses-feature>
-
-
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -34,16 +33,14 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- Launcher Activity -->
-
     <application
         android:name=".Sharing.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/app_logo"
-        android:largeHeap="true"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo">
-
         <activity
             android:name=".Home_Logo"
             android:noHistory="true"
@@ -57,14 +54,14 @@
 
         <!-- Activity Registration -->
 
+
         <!-- For sharing -->
 
         <activity
             android:name=".Sharing.WiFiDirectActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action
-                    android:name="com.syncbrothers.hymnatune.Sharing.WiFiDirectActivity" />
+                <action android:name="com.syncbrothers.hymnatune.Sharing.WiFiDirectActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -86,7 +83,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Sharing.home"
             android:label="@string/title_activity_home">
@@ -95,7 +91,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Sharing.help"
@@ -107,30 +102,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.syncbrothers.hymnatune.Sharing.MainScreenActivity"
-            android:label="@string/app_name"
-            android:configChanges="orientation|screenSize">
+            android:name=".Sharing.MainScreenActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="com.syncbrothers.hymnatune.Sharing.MainScreenActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity-
             android:name="com.syncbrothers.hymnatune.Sharing.ChatSearchScreenFrag"
-            android:label="@string/title_activity_chat_search_screen_frag"
-            android:configChanges="orientation|screenSize">
-        </activity->
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_chat_search_screen_frag" />
         <activity-
             android:name="com.syncbrothers.hymnatune.Sharing.ChatHistoryScreenFrag"
-            android:label="@string/title_activity_chat_history_screen_frag"
-            android:configChanges="orientation|screenSize" >
-        </activity->
-        <activity
-            android:name="com.syncbrothers.hymnatune.Sharing.QuickPrefsActivity"
-            android:label="@string/app_name"
             android:configChanges="orientation|screenSize"
-            android:parentActivityName="com.syncbrothers.hymnatune.Sharing.MainScreenActivity" >
+            android:label="@string/title_activity_chat_history_screen_frag" />
+
+        <activity
+            android:name=".Sharing.QuickPrefsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:parentActivityName=".Sharing.MainScreenActivity">
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
@@ -139,13 +134,13 @@
             >
         </activity>
 
-        <service android:name="com.syncbrothers.hymnatune.Sharing.LocalService" >
-        </service>
+        <service android:name=".Sharing.LocalService" />
+
         <activity
-            android:name="com.syncbrothers.hymnatune.Sharing.ChatActivity"
+            android:name=".Sharing.ChatActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_chat"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName="com.syncbrothers.hymnatune.Sharing.MainScreenActivity" >
+            android:parentActivityName=".Sharing.MainScreenActivity">
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
@@ -153,10 +148,10 @@
                 android:value="com.syncbrothers.hymnatune.Sharing.MainScreenActivity" />
         </activity>
         <activity
-            android:name="com.syncbrothers.hymnatune.Sharing.HistoryActivity"
-            android:label="@string/title_activity_history"
+            android:name=".Sharing.HistoryActivity"
             android:configChanges="orientation|screenSize"
-            android:parentActivityName="com.syncbrothers.hymnatune.Sharing.MainScreenActivity" >
+            android:label="@string/title_activity_history"
+            android:parentActivityName=".Sharing.MainScreenActivity">
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
@@ -164,32 +159,37 @@
                 android:value="com.syncbrothers.hymnatune.Sharing.MainScreenActivity" />
         </activity>
 
+        <!-- For wifi -->
 
-
-        <!-- For wifi-->
-
-        <activity android:name=".Wifi.PlayScreen"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Wifi.Songs"
-             android:screenOrientation="portrait"/>
-        <activity android:name=".Wifi.PlaySolo"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Wifi.PlayScreenSolo"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Wifi.PlayScreenHost"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Wifi.PlayScreenClient"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Wifi.Receiver"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Select_Screen"
-            android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".Wifi.PlayScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Wifi.Songs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Wifi.PlaySolo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Wifi.PlayScreenSolo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Wifi.PlayScreenHost"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Wifi.PlayScreenClient"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Wifi.Receiver"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Select_Screen"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Wifi.Home_Screen"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-
-
+            android:screenOrientation="portrait" />
+        <activity android:name=".Wifi.Join"></activity>
     </application>
+
 </manifest>
